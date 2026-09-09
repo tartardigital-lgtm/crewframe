@@ -1,0 +1,51 @@
+#faq {
+  padding: 100px 0;
+  background: var(--bg);
+}
+.faq-cta { margin-top: 24px; }
+
+.faq-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  margin-bottom: 11px;
+  overflow: hidden;
+  transition: var(--tr);
+}
+.faq-item:hover { border-color: rgba(var(--orange-rgb), 0.32); }
+.faq-btn {
+  width: 100%;
+  background: var(--card);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.94rem;
+  padding: 19px 22px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  text-align: left;
+  font-family: var(--font-body);
+}
+.faq-btn:not(.collapsed) { color: var(--orange); }
+.faq-q { display: flex; align-items: center; gap: 14px; }
+.faq-ic { flex-shrink: 0; color: var(--orange); }
+.faq-caret {
+  flex-shrink: 0;
+  color: var(--text3);
+  transition: transform 0.3s;
+}
+.faq-btn:not(.collapsed) .faq-caret { transform: rotate(180deg); color: var(--orange); }
+.faq-body {
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.faq-body-inner {
+  padding: 0 22px 20px;
+  font-size: 0.9rem;
+  color: var(--text2);
+  line-height: 1.8;
+}
+

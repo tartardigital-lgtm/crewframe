@@ -1,0 +1,51 @@
+#loader {
+  position: fixed;
+  inset: 0;
+  background: #0e1114;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 22px;
+  transition: opacity 0.6s, visibility 0.6s;
+}
+#loader.gone {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+#loader .ld-mark {
+  width: 62px;
+  color: #f2f1ee;
+}
+.ld-logo {
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  font-weight: 900;
+  color: #f2f1ee;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.ld-bar {
+  width: 190px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+.ld-fill {
+  height: 100%;
+  background: var(--orange);
+  animation: ldFill 1.1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes ldFill {
+  from { width: 0; }
+  to { width: 100%; }
+}
+.ld-tag {
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(242, 241, 238, 0.4);
+  font-weight: 600;
+}

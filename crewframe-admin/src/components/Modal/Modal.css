@@ -1,0 +1,78 @@
+.adm-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 10, 12, 0.65);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 200;
+  animation: adm-fade 0.18s ease;
+}
+
+@keyframes adm-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.adm-modal {
+  background: var(--surface);
+  border: 1px solid var(--border-str);
+  border-radius: var(--rl);
+  box-shadow: var(--sh3);
+  width: 100%;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  animation: adm-pop 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes adm-pop {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.adm-modal-sm { max-width: 420px; }
+.adm-modal-md { max-width: 560px; }
+.adm-modal-lg { max-width: 780px; }
+
+.adm-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--border);
+}
+
+.adm-modal-head h3 {
+  font-size: 19px;
+}
+
+.adm-modal-x {
+  background: transparent;
+  border: none;
+  color: var(--text3);
+  padding: 6px;
+  border-radius: 8px;
+  display: flex;
+  transition: var(--tr);
+}
+.adm-modal-x:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.adm-modal-body {
+  padding: 20px 22px;
+  overflow-y: auto;
+}
+
+.adm-modal-foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 22px;
+  border-top: 1px solid var(--border);
+}

@@ -1,0 +1,305 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   CREWFRAME — design tokens & shared primitives
+   These classes are used across many components, so they live
+   here instead of being duplicated in every component CSS file.
+   ============================================================ */
+
+:root {
+  --font-display: "Barlow Condensed", "Oswald", "Arial Narrow", "Roboto Condensed",
+    "Helvetica Neue Condensed", "DejaVu Sans Condensed", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --orange: #f36a2d;
+  --orange-rgb: 243, 106, 45;
+  --orange-dk: #d9531a;
+  --charcoal: #15191d;
+  --stone: #e8e5df;
+  --white: #fafaf8;
+
+  --primary: var(--orange);
+  --primary-rgb: var(--orange-rgb);
+  --dark: var(--charcoal);
+
+  /* Site runs on the light palette (brand default) */
+  --bg: #fafaf8;
+  --bg2: #f2f0ec;
+  --bg3: #e8e5df;
+  --card: #ffffff;
+  --text: #15191d;
+  --text2: #575e64;
+  --text3: #878d93;
+  --border: rgba(21, 25, 29, 0.12);
+  --border-str: rgba(21, 25, 29, 0.22);
+  --blue: #496779;
+  --nav-bg: rgba(250, 250, 248, 0.92);
+  --band: #15191d;
+
+  --sh1: 0 2px 14px rgba(21, 25, 29, 0.06);
+  --sh2: 0 10px 40px rgba(21, 25, 29, 0.1);
+  --sh3: 0 24px 70px rgba(21, 25, 29, 0.14);
+
+  --r: 12px;
+  --rs: 9px;
+  --rl: 16px;
+  --tr: all 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  --trf: all 0.16s ease;
+}
+
+* ,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 78px;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 15px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  line-height: 1.04;
+  font-weight: 800;
+  letter-spacing: -0.005em;
+  color: var(--text);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--tr);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+section {
+  overflow: hidden;
+}
+
+::selection {
+  background: var(--orange);
+  color: #fff;
+}
+
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ==================== THE FRAME (corner brackets) ==================== */
+.frame {
+  position: relative;
+}
+.frame > .fr-c {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 2px solid var(--orange);
+  pointer-events: none;
+  z-index: 3;
+  transition: var(--tr);
+}
+.frame > .fr-c.fr-tl {
+  top: -1px;
+  left: -1px;
+  border-right: 0;
+  border-bottom: 0;
+}
+.frame > .fr-c.fr-tr {
+  top: -1px;
+  right: -1px;
+  border-left: 0;
+  border-bottom: 0;
+}
+.frame > .fr-c.fr-bl {
+  bottom: -1px;
+  left: -1px;
+  border-right: 0;
+  border-top: 0;
+}
+.frame > .fr-c.fr-br {
+  bottom: -1px;
+  right: -1px;
+  border-left: 0;
+  border-top: 0;
+}
+.frame--hover > .fr-c {
+  opacity: 0;
+  width: 14px;
+  height: 14px;
+}
+.frame--hover:hover > .fr-c {
+  opacity: 1;
+  width: 28px;
+  height: 28px;
+}
+
+/* ==================== PROOF MARKERS ==================== */
+.proof {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  line-height: 1;
+  white-space: nowrap;
+  border-radius: 0;
+}
+.proof--fill { background: var(--orange); color: #fff; }
+.proof--ink { background: var(--charcoal); color: #f2f1ee; }
+.proof--out {
+  background: transparent;
+  border: 1.5px solid var(--border-str);
+  color: var(--text2);
+}
+.proof--glass {
+  background: rgba(10, 12, 15, 0.72);
+  backdrop-filter: blur(8px);
+  color: #f2f1ee;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+.proof--blue { background: var(--blue); color: #fff; }
+
+/* ==================== SECTION FURNITURE ==================== */
+.sec-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 18px;
+}
+.sec-badge::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+.sec-title {
+  font-size: clamp(1.95rem, 3.9vw, 3.3rem);
+  font-weight: 800;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+.sec-title span { color: var(--orange); }
+.sec-desc {
+  font-size: 1rem;
+  color: var(--text2);
+  max-width: 560px;
+  line-height: 1.75;
+}
+.sec-hd { margin-bottom: 58px; }
+
+/* ==================== BUTTONS ==================== */
+.btn-p {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 2px solid var(--primary);
+  transition: var(--tr);
+  cursor: pointer;
+}
+.btn-p:hover {
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(var(--primary-rgb), 0.4);
+}
+.btn-o {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background: transparent;
+  color: var(--text);
+  border-radius: 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 2px solid var(--border-str);
+  transition: var(--tr);
+  cursor: pointer;
+}
+.btn-o:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+/* ==================== LOGO ==================== */
+.cf-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.cf-mark {
+  width: 34px;
+  height: auto;
+  flex-shrink: 0;
+  color: var(--text);
+}
+.cf-word {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: 0.005em;
+  line-height: 1;
+  color: var(--text);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ==================== REVEAL-ON-SCROLL (replaces AOS) ==================== */
+.reveal {
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal-up { transform: translateY(28px); }
+.reveal-left { transform: translateX(36px); }
+.reveal-right { transform: translateX(-36px); }
+.reveal.is-visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+@media (max-width: 767px) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}

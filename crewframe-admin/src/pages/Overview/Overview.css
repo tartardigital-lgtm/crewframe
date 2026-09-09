@@ -1,0 +1,42 @@
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.ov-recent {
+  padding: 20px;
+}
+
+.ov-recent-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.ov-recent-head h3 {
+  font-size: 17px;
+}
+
+.ov-recent-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--orange-lt);
+}
+
+@media (min-width: 576px) {
+  .stat-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .stat-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}

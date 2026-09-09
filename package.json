@@ -1,0 +1,14 @@
+{
+  "name": "crewframe-workspace",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Runs the CrewFrame backend, main site, and admin panel together for local development.",
+  "scripts": {
+    "install:all": "npm install --prefix crewframe-backend && npm install --prefix crewframe-app && npm install --prefix crewframe-admin",
+    "seed": "npm run seed --prefix crewframe-backend",
+    "dev": "concurrently -n backend,site,admin -c blue,green,magenta \"npm run dev --prefix crewframe-backend\" \"npm run dev --prefix crewframe-app\" \"npm run dev --prefix crewframe-admin\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}

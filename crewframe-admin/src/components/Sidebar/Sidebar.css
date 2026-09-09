@@ -1,0 +1,119 @@
+.adm-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 250px;
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  z-index: 120;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.adm-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 22px 22px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.adm-brand-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dk) 100%);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(var(--orange-rgb), 0.32);
+  flex-shrink: 0;
+}
+
+.adm-brand-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: 0.01em;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.adm-brand-text em {
+  font-style: normal;
+  color: var(--orange-lt);
+}
+
+.adm-brand-text small {
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text3);
+}
+
+.adm-nav {
+  flex: 1;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  overflow-y: auto;
+}
+
+.adm-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--rs);
+  color: var(--text2);
+  font-weight: 600;
+  font-size: 14px;
+  transition: var(--tr);
+}
+
+.adm-nav-link:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+}
+
+.adm-nav-link.is-active {
+  background: rgba(var(--orange-rgb), 0.12);
+  color: var(--orange-lt);
+}
+
+.adm-sidebar-foot {
+  padding: 16px 22px 22px;
+  border-top: 1px solid var(--border);
+}
+
+.adm-view-site {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text3);
+  transition: var(--tr);
+}
+
+.adm-view-site:hover {
+  color: var(--orange-lt);
+}
+
+@media (max-width: 991px) {
+  .adm-sidebar {
+    transform: translateX(-100%);
+    box-shadow: var(--sh3);
+  }
+  .adm-sidebar.is-open {
+    transform: translateX(0);
+  }
+}

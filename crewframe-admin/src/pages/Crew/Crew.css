@@ -1,0 +1,105 @@
+.crew-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.crew-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: var(--tr);
+}
+
+.crew-card:hover {
+  border-color: var(--border-str);
+}
+
+.crew-card-media {
+  height: 160px;
+  background-size: cover;
+  background-position: center top;
+  background-color: var(--bg2);
+}
+
+.crew-card-body {
+  padding: 14px 16px;
+  flex: 1;
+}
+
+.crew-card-body h4 {
+  font-size: 16px;
+  margin-bottom: 2px;
+}
+
+.crew-card-role {
+  color: var(--orange-lt);
+  font-size: 12.5px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.crew-card-bio {
+  color: var(--text3);
+  font-size: 13px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.skills-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skill-row {
+  display: grid;
+  grid-template-columns: 1fr 64px auto auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.skill-row input {
+  background: var(--bg2);
+  border: 1px solid var(--border-str);
+  border-radius: var(--rs);
+  padding: 8px 10px;
+  color: var(--text);
+}
+
+.skill-row span {
+  color: var(--text3);
+  font-size: 12.5px;
+}
+
+.skill-remove {
+  background: transparent;
+  border: 1px solid var(--border-str);
+  border-radius: 8px;
+  padding: 7px;
+  color: var(--text3);
+  transition: var(--tr);
+}
+
+.skill-remove:hover {
+  color: #f0806e;
+  border-color: rgba(224, 83, 63, 0.4);
+}
+
+@media (min-width: 576px) {
+  .crew-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .crew-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

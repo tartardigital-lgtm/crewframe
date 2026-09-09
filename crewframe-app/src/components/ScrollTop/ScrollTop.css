@@ -1,0 +1,27 @@
+#scrtop {
+  position: fixed;
+  bottom: 26px;
+  right: 26px;
+  width: 44px;
+  height: 44px;
+  background: var(--orange);
+  color: #fff;
+  border-radius: var(--rs);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--tr);
+  z-index: 989;
+  box-shadow: 0 8px 24px rgba(var(--orange-rgb), 0.4);
+}
+#scrtop.show {
+  opacity: 1;
+  visibility: visible;
+}
+#scrtop:hover {
+  transform: translateY(-4px);
+}

@@ -1,0 +1,38 @@
+.adm-shell {
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.adm-main {
+  margin-left: 250px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.adm-content {
+  flex: 1;
+  padding: 28px 28px 60px;
+  max-width: 1400px;
+  width: 100%;
+}
+
+.adm-backdrop {
+  display: none;
+}
+
+@media (max-width: 991px) {
+  .adm-main {
+    margin-left: 0;
+  }
+  .adm-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 110;
+  }
+  .adm-content {
+    padding: 20px 16px 48px;
+  }
+}

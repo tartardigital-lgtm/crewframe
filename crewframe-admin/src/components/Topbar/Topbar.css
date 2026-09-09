@@ -1,0 +1,133 @@
+.adm-topbar {
+  height: 66px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 24px;
+  background: rgba(21, 25, 29, 0.7);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 90;
+}
+
+.adm-menu-btn {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--border-str);
+  border-radius: 9px;
+  padding: 8px;
+  color: var(--text2);
+}
+
+.adm-topbar-title {
+  font-size: 18px;
+  flex: 1;
+}
+
+.adm-topbar-right {
+  position: relative;
+}
+
+.adm-user-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: 1px solid var(--border-str);
+  border-radius: 100px;
+  padding: 5px 12px 5px 5px;
+  color: var(--text2);
+  transition: var(--tr);
+}
+
+.adm-user-btn:hover {
+  border-color: rgba(232, 229, 223, 0.3);
+  color: var(--text);
+}
+
+.adm-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dk) 100%);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.adm-user-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.adm-user-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  background: var(--surface2);
+  border: 1px solid var(--border-str);
+  border-radius: var(--rs);
+  box-shadow: var(--sh3);
+  min-width: 210px;
+  padding: 6px;
+  animation: adm-pop 0.16s ease;
+  z-index: 95;
+}
+
+.adm-user-menu-email {
+  padding: 8px 10px;
+  font-size: 12px;
+  color: var(--text3);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 6px;
+  word-break: break-all;
+}
+
+.adm-user-menu button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  padding: 9px 10px;
+  border-radius: 7px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text2);
+  transition: var(--tr);
+  text-align: left;
+}
+
+.adm-user-menu button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+}
+
+.adm-user-menu-logout {
+  color: #f0806e !important;
+}
+
+@keyframes adm-pop {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 991px) {
+  .adm-menu-btn {
+    display: flex;
+  }
+  .adm-user-name {
+    display: none;
+  }
+}

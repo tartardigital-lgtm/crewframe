@@ -1,0 +1,33 @@
+.c-dot,
+.c-ring {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9997;
+  transition: opacity 0.3s;
+}
+.c-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--orange);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+.c-ring {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--orange);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.28s, height 0.28s, opacity 0.3s;
+}
+.c-ring.big {
+  width: 54px;
+  height: 54px;
+  border-color: rgba(var(--orange-rgb), 0.45);
+}
+@media (max-width: 1024px), (hover: none) {
+  .c-dot,
+  .c-ring {
+    display: none;
+  }
+}
