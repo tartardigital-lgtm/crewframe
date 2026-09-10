@@ -1,8 +1,10 @@
 import { Router } from "express";
 import Lead from "../models/Lead.js";
 import { requireAuth } from "../middleware/auth.js";
+import { Resend } from "resend";
 
 const router = Router();
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 /** Public — the site's contact form posts here. No auth required. */
 router.post("/", async (req, res) => {
@@ -13,6 +15,23 @@ router.post("/", async (req, res) => {
   }
 
   const lead = await Lead.create({ firstName, lastName, email, trade, message });
+
+  try {
+    if (process.env.RESEND_API_KEY && process.env.NOTIFY_EMAIL) {
+      await resend.emails.send({
+        from: "CrewFrame Leads <onboarding@resend.dev>",
+        to: process.env.NOTIFY_EMAIL,
+        subject: `New lead: ${firstName} ${lastName}`,
+        html: `<p><strong>Name:</strong> ${firstName} ${lastName}</p>
+               <p><strong>Email:</strong> ${email}</p>
+               <p><strong>Trade:</strong> ${trade || "-"}</p>
+               <p><strong>Message:</strong> ${message || "-"}</p>`,
+      });
+    }
+  } catch (err) {
+    console.error("[email] failed to send lead notification:", err);
+  }
+
   res.status(201).json({ ok: true, id: lead._id });
 });
 
