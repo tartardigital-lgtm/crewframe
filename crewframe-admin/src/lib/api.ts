@@ -44,12 +44,13 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   }
 
   if (!res.ok) {
-    const message =
-      (body && typeof body === "object" && "error" in body && String((body as { error: unknown }).error)) ||
-      `Request failed (${res.status})`;
+    let message = `Request failed (${res.status})`;
+    if (body && typeof body === "object" && "error" in body) {
+      message = String((body as { error: unknown }).error);
+    }
     throw new ApiError(message, res.status);
   }
-
+  
   return body as T;
 }
 
