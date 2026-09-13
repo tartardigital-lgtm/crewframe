@@ -28,6 +28,7 @@ export interface WorkItem {
   cat: string[]; // filter categories, e.g. ["reel"], ["reel", "proof"], ["long"]
   format: WorkFormat;
   img: string;
+  videoUrl?: string;
   title: string;
   marker: string;
   dur: string;

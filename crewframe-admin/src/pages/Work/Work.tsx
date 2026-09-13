@@ -11,6 +11,7 @@ const emptyForm = {
   format: "reel" as "reel" | "long",
   cat: "reel",
   img: "",
+  videoUrl: "",
   marker: "",
   dur: "",
   loc: "",
@@ -68,6 +69,7 @@ export default function Work() {
       format: item.format,
       cat: item.cat.join(", "),
       img: item.img,
+      videoUrl: item.videoUrl ?? "",
       marker: item.marker,
       dur: item.dur,
       loc: item.loc,
@@ -215,6 +217,15 @@ export default function Work() {
           <div className="field adm-span-2">
             <label>Image URL</label>
             <input required value={form.img} onChange={(e) => setForm({ ...form, img: e.target.value })} placeholder="https://…" />
+          </div>
+          <div className="field adm-span-2">
+            <label>YouTube video URL (optional)</label>
+            <input
+              type="url"
+              value={form.videoUrl}
+              onChange={(e) => setForm({ ...form, videoUrl: e.target.value })}
+              placeholder="https://www.youtube.com/watch?v=…"
+            />
           </div>
           <div className="field">
             <label>Marker</label>

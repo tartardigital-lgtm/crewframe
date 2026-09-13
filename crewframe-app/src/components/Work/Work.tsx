@@ -14,6 +14,19 @@ const filters = [
   { id: "proof", label: "Customer Proof" },
 ];
 
+function getYoutubeEmbedUrl(videoUrl: string) {
+  try {
+    const url = new URL(videoUrl);
+    let videoId = url.searchParams.get("v");
+    if (!videoId && url.hostname === "youtu.be") videoId = url.pathname.slice(1);
+    if (!videoId && url.pathname.startsWith("/shorts/")) videoId = url.pathname.split("/")[2];
+    if (!videoId && url.pathname.startsWith("/embed/")) videoId = url.pathname.split("/")[2];
+    return videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0` : null;
+  } catch {
+    return null;
+  }
+}
+
 function ReelCard({ item, onOpen }: { item: WorkItem; onOpen: () => void }) {
   return (
     <article className="reel-card frame frame--hover" onClick={onOpen}>
@@ -178,14 +191,25 @@ export default function Work() {
       <Modal open={!!active} onClose={() => setActive(null)} title={active?.title ?? ""}>
         {active && (
           <>
-            <div className={`wm-media frame ${active.format === "reel" ? "is-reel" : "is-long"}`}>
-              <span className="fr-c fr-tl" />
-              <span className="fr-c fr-br" />
-              <img src={active.img} alt={active.title} />
-              <span className="wm-play">
-                <IconPlay />
-              </span>
-            </div>
+            {active.videoUrl && getYoutubeEmbedUrl(active.videoUrl) ? (
+              <div className="wm-video frame">
+                <iframe
+                  src={getYoutubeEmbedUrl(active.videoUrl) ?? undefined}
+                  title={active.title}
+                  allow="autoplay; encrypted-media; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            ) : (
+              <div className={`wm-media frame ${active.format === "reel" ? "is-reel" : "is-long"}`}>
+                <span className="fr-c fr-tl" />
+                <span className="fr-c fr-br" />
+                <img src={active.img} alt={active.title} />
+                <span className="wm-play">
+                  <IconPlay />
+                </span>
+              </div>
+            )}
             <div className="d-flex-gap">
               <span className="proof proof--fill">{active.marker}</span>
               <span className="proof proof--out">{active.format === "reel" ? "Vertical · 9:16" : "Long-form · 16:9"}</span>

@@ -5,6 +5,7 @@ const workItemSchema = new Schema(
     cat: { type: [String], default: [] },
     format: { type: String, enum: ["reel", "long"], required: true },
     img: { type: String, required: true },
+    videoUrl: { type: String, default: "" },
     title: { type: String, required: true },
     marker: { type: String, default: "Real Job" },
     dur: { type: String, default: "0:30" },

@@ -23,6 +23,7 @@ export interface WorkItem {
   cat: string[];
   format: "reel" | "long";
   img: string;
+  videoUrl?: string;
   title: string;
   marker: string;
   dur: string;
