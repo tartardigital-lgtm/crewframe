@@ -16,12 +16,14 @@ const filters = [
 
 function getYoutubeEmbedUrl(videoUrl: string) {
   try {
-    const url = new URL(videoUrl);
+    const url = new URL(videoUrl.trim());
+    const hostname = url.hostname.replace(/^www\./, "");
     let videoId = url.searchParams.get("v");
-    if (!videoId && url.hostname === "youtu.be") videoId = url.pathname.slice(1);
+    if (!videoId && hostname === "youtu.be") videoId = url.pathname.slice(1);
     if (!videoId && url.pathname.startsWith("/shorts/")) videoId = url.pathname.split("/")[2];
     if (!videoId && url.pathname.startsWith("/embed/")) videoId = url.pathname.split("/")[2];
-    return videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0` : null;
+    if (!videoId && url.pathname.startsWith("/live/")) videoId = url.pathname.split("/")[2];
+    return videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&rel=0` : null;
   } catch {
     return null;
   }
