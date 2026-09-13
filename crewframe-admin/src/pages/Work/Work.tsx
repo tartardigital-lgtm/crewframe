@@ -215,8 +215,8 @@ export default function Work() {
             <input value={form.cat} onChange={(e) => setForm({ ...form, cat: e.target.value })} placeholder="reel, proof" />
           </div>
           <div className="field adm-span-2">
-            <label>Image URL</label>
-            <input required value={form.img} onChange={(e) => setForm({ ...form, img: e.target.value })} placeholder="https://…" />
+            <label>Image URL (optional; YouTube thumbnail used automatically)</label>
+            <input value={form.img} onChange={(e) => setForm({ ...form, img: e.target.value })} placeholder="https://…" />
           </div>
           <div className="field adm-span-2">
             <label>YouTube video URL (optional)</label>

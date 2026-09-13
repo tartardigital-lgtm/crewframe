@@ -14,7 +14,7 @@ const filters = [
   { id: "proof", label: "Customer Proof" },
 ];
 
-function getYoutubeEmbedUrl(videoUrl: string) {
+function getYoutubeVideoId(videoUrl: string) {
   try {
     const url = new URL(videoUrl.trim());
     const hostname = url.hostname.replace(/^www\./, "");
@@ -23,18 +23,29 @@ function getYoutubeEmbedUrl(videoUrl: string) {
     if (!videoId && url.pathname.startsWith("/shorts/")) videoId = url.pathname.split("/")[2];
     if (!videoId && url.pathname.startsWith("/embed/")) videoId = url.pathname.split("/")[2];
     if (!videoId && url.pathname.startsWith("/live/")) videoId = url.pathname.split("/")[2];
-    return videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&rel=0` : null;
+    return videoId?.split(/[?&#]/)[0] ?? null;
   } catch {
     return null;
   }
 }
 
+function getYoutubeEmbedUrl(videoUrl: string) {
+  const videoId = getYoutubeVideoId(videoUrl);
+  return videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&rel=0` : null;
+}
+
+function getYoutubeThumbnailUrl(videoUrl?: string) {
+  const videoId = videoUrl ? getYoutubeVideoId(videoUrl) : null;
+  return videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : null;
+}
+
 function ReelCard({ item, onOpen }: { item: WorkItem; onOpen: () => void }) {
+  const imageUrl = getYoutubeThumbnailUrl(item.videoUrl) ?? item.img;
   return (
     <article className="reel-card frame frame--hover" onClick={onOpen}>
       <span className="fr-c fr-tl" />
       <span className="fr-c fr-br" />
-      <img src={item.img} alt={item.title} />
+      <img src={imageUrl} alt={item.title} />
       <span className="reel-play">
         <IconPlay />
       </span>
@@ -57,12 +68,13 @@ function ReelCard({ item, onOpen }: { item: WorkItem; onOpen: () => void }) {
 }
 
 function LongCard({ item, onOpen }: { item: WorkItem; onOpen: () => void }) {
+  const imageUrl = getYoutubeThumbnailUrl(item.videoUrl) ?? item.img;
   return (
     <article className="long-card" onClick={onOpen}>
       <div className="long-media frame frame--hover">
         <span className="fr-c fr-tl" />
         <span className="fr-c fr-br" />
-        <img src={item.img} alt={item.title} />
+        <img src={imageUrl} alt={item.title} />
         <span className="long-play">
           <IconPlay />
         </span>
@@ -206,7 +218,7 @@ export default function Work() {
               <div className={`wm-media frame ${active.format === "reel" ? "is-reel" : "is-long"}`}>
                 <span className="fr-c fr-tl" />
                 <span className="fr-c fr-br" />
-                <img src={active.img} alt={active.title} />
+                <img src={getYoutubeThumbnailUrl(active.videoUrl) ?? active.img} alt={active.title} />
                 <span className="wm-play">
                   <IconPlay />
                 </span>
