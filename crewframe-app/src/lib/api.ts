@@ -1,5 +1,20 @@
 const BASE_URL = (import.meta.env.VITE_API_URL as string | undefined) || "http://localhost:4000/api";
 
+export async function getWorkItems<T>(): Promise<T> {
+  const res = await fetch(`${BASE_URL}/work`);
+  if (!res.ok) {
+    let message = `Request failed (${res.status})`;
+    try {
+      const body = await res.json();
+      if (body?.error) message = body.error;
+    } catch {
+      /* ignore parse errors */
+    }
+    throw new Error(message);
+  }
+  return res.json() as Promise<T>;
+}
+
 export interface LeadPayload {
   firstName: string;
   lastName: string;

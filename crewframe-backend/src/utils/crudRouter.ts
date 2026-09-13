@@ -28,17 +28,27 @@ export function crudRouter(model: Model<any>) {
   });
 
   router.post("/", requireAuth, async (req, res) => {
-    const item = await model.create(req.body);
-    res.status(201).json(item);
+    try {
+      const item = await model.create(req.body);
+      res.status(201).json(item);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Invalid request.";
+      res.status(400).json({ error: message });
+    }
   });
 
   router.put("/:id", requireAuth, async (req, res) => {
-    const item = await model.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    if (!item) return res.status(404).json({ error: "Not found." });
-    res.json(item);
+    try {
+      const item = await model.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true,
+      });
+      if (!item) return res.status(404).json({ error: "Not found." });
+      res.json(item);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Invalid request.";
+      res.status(400).json({ error: message });
+    }
   });
 
   router.delete("/:id", requireAuth, async (req, res) => {

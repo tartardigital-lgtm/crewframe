@@ -22,7 +22,9 @@ export interface ServiceItem {
 export type WorkFormat = "reel" | "long";
 
 export interface WorkItem {
-  id: string;
+  id?: string;
+  _id?: string;
+  order?: number;
   cat: string[]; // filter categories, e.g. ["reel"], ["reel", "proof"], ["long"]
   format: WorkFormat;
   img: string;

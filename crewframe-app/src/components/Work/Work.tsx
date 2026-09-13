@@ -1,6 +1,7 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { workItems } from "../../data/content";
 import type { WorkItem } from "../../types/content";
+import { getWorkItems } from "../../lib/api";
 import { IconLocation, IconEye, IconMobile, IconYoutube, IconPlay } from "../Icons";
 import { useReveal } from "../../hooks/useReveal";
 import Modal from "../Modal/Modal";
@@ -81,14 +82,29 @@ function LongCard({ item, onOpen }: { item: WorkItem; onOpen: () => void }) {
 export default function Work() {
   const [filter, setFilter] = useState("all");
   const [active, setActive] = useState<WorkItem | null>(null);
+  const [items, setItems] = useState<WorkItem[]>(workItems);
   const hd = useReveal<HTMLDivElement>("right");
   const tabsReveal = useReveal<HTMLDivElement>("left");
   const shortReveal = useReveal<HTMLDivElement>("up");
   const longReveal = useReveal<HTMLDivElement>("up");
 
+  useEffect(() => {
+    let cancelled = false;
+    getWorkItems<WorkItem[]>()
+      .then((remoteItems) => {
+        if (!cancelled && remoteItems.length > 0) setItems(remoteItems);
+      })
+      .catch(() => {
+        // Keep the bundled portfolio visible when the API is unavailable.
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const visible = useMemo(
-    () => workItems.filter((w) => filter === "all" || w.cat.includes(filter)),
-    [filter]
+    () => items.filter((w) => filter === "all" || w.cat.includes(filter)),
+    [filter, items]
   );
   const reels = visible.filter((w) => w.format === "reel");
   const longs = visible.filter((w) => w.format === "long");
@@ -134,7 +150,7 @@ export default function Work() {
             </div>
             <div className="reel-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4">
               {reels.map((item) => (
-                <ReelCard key={item.id} item={item} onOpen={() => setActive(item)} />
+                <ReelCard key={item._id ?? item.id} item={item} onOpen={() => setActive(item)} />
               ))}
             </div>
           </div>
@@ -152,7 +168,7 @@ export default function Work() {
             </div>
             <div className="long-grid grid grid-cols-1 md:grid-cols-2 gap-6">
               {longs.map((item) => (
-                <LongCard key={item.id} item={item} onOpen={() => setActive(item)} />
+                <LongCard key={item._id ?? item.id} item={item} onOpen={() => setActive(item)} />
               ))}
             </div>
           </div>

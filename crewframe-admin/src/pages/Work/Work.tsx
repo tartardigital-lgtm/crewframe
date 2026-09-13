@@ -214,7 +214,7 @@ export default function Work() {
           </div>
           <div className="field adm-span-2">
             <label>Image URL</label>
-            <input value={form.img} onChange={(e) => setForm({ ...form, img: e.target.value })} placeholder="https://…" />
+            <input required value={form.img} onChange={(e) => setForm({ ...form, img: e.target.value })} placeholder="https://…" />
           </div>
           <div className="field">
             <label>Marker</label>
